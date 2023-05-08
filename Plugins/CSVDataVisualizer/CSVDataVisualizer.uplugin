@@ -1,0 +1,32 @@
+{
+    "FileVersion": 3,
+    "Version": 1,
+    "VersionName": "1.0",
+    "FriendlyName": "CSV Data Visualizer",
+    "Description": "A plugin to visualize CSV data of an object's transformation over time.",
+    "Category": "Data Visualization",
+    "CreatedBy": "PacMarTech",
+    "CreatedByURL": "",
+    "DocsURL": "",
+    "MarketplaceURL": "",
+    "SupportURL": "",
+    "CanContainContent": false,
+    "IsBetaVersion": false,
+    "IsExperimentalVersion": false,
+    "Installed": false,
+    "Modules": [
+        {
+            "Name": "CSVDataVisualizer",
+            "Type": "Editor",
+            "LoadingPhase": "PostEngineInit",
+            "AdditionalDependencies": [
+                "Engine",
+                "EditorScriptingUtilities",
+                "DataDriven",
+                "EngineSettings",
+                "AssetRegistry"
+            ]
+        }
+    ],
+    "EnabledByDefault" : true
+}
