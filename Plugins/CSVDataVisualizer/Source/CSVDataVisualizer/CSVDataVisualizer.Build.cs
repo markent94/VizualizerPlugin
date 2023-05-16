@@ -4,7 +4,7 @@ public class CSVDataVisualizer : ModuleRules {
     public CSVDataVisualizer ( ReadOnlyTargetRules Target ) : base ( Target ) {
         PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 
-        PublicDependencyModuleNames.AddRange ( new string[] { "Core", "CoreUObject", "Engine", "InputCore", "UnrealEd" } );
+        PublicDependencyModuleNames.AddRange ( new string[] { "Core", "CoreUObject", "Engine", "InputCore", "UnrealEd", "UMG" } );
 
         PrivateDependencyModuleNames.AddRange ( new string[] {  } );
 
