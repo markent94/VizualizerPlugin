@@ -63,6 +63,9 @@ void UPlaybackWidget::InitCSV(FString FilePath)
             AnimatedObject = *ActorItr;
             break;
         }
+
+        // Set paused flag
+        bIsPaused = true;
     }
 
     const FTransformData& Data = CSVData[0];
@@ -86,17 +89,26 @@ void UPlaybackWidget::InitCSV(FString FilePath)
 
 void UPlaybackWidget::OnPauseButtonClicked()
 {
-    // Add your button click handling code here
+    // Set paused flag
+    bIsPaused = true;
 }
 
 void UPlaybackWidget::OnRestartButtonClicked()
 {
-    // Add your button click handling code here
+    // Reset slider position
+    if (PlaybackSlider)
+    {
+        PlaybackSlider->SetValue(0.f);
+    }
+
+    // Set paused flag
+    bIsPaused = true;
 }
 
 void UPlaybackWidget::OnPlayButtonClicked()
 {
-    // Add your button click handling code here
+    // Remove paused flag
+    bIsPaused = false;
 }
 
 void UPlaybackWidget::OnSliderValueChanged(float Value)
@@ -135,3 +147,27 @@ void UPlaybackWidget::HandleOnComboBoxOpening()
         }
     }
 }
+
+void UPlaybackWidget::NativeTick(const FGeometry& MyGeometry, float InDeltaTime)
+{
+    Super::NativeTick(MyGeometry, InDeltaTime);
+
+    if (!bIsPaused && PlaybackSlider && AnimatedObject)
+    {
+        // Get slider value (assumed to be between 0 and CSVData.Num() - 1)
+        int32 SliderValue = FMath::RoundToInt(PlaybackSlider->GetValue());
+
+        // Make sure the index is valid
+        if (CSVData.IsValidIndex(SliderValue))
+        {
+            // Get the transform data from the CSVData array
+            FTransformData TransformData = CSVData[SliderValue];
+
+            // Apply the transform to the AnimatedObject
+            AnimatedObject->SetActorLocationAndRotation(TransformData.Position, TransformData.Rotation);
+        }
+
+        PlaybackSlider->SetValue(SliderValue + 1);
+    }
+}
+

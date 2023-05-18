@@ -24,6 +24,7 @@ public:
     UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
     class USlider* PlaybackSlider;
 
+    virtual void NativeTick(const FGeometry& MyGeometry, float InDeltaTime) override;
 
 private:    
     UFUNCTION(BlueprintCallable)
@@ -54,6 +55,10 @@ private:
     class AActor* AnimatedObject;
 
     UPROPERTY()
-        class APlaybackCamera* PlaybackCamera;
+    class APlaybackCamera* PlaybackCamera;
+
+    UPROPERTY()
+    bool bIsPaused = false;
+
 
 };
